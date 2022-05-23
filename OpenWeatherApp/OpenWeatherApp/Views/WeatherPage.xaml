@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+    <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             x:Class="OpenWeatherApp.Views.WeatherPage">
+
+
+
+
+    <ContentPage.Content >
+
+
+        <Grid BackgroundColor="DodgerBlue" >
+            <Image Source="Images/OpenWeatherApp.jpg" />
+            <CollectionView ItemsSource="{Binding WeatherList}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout  Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+                            <StackLayout Padding="10">
+                                <Grid BackgroundColor="White">
+                                    <Label Text= "Open Weather App"
+                                FontFamily="CustomFont" FontSize="30" TextColor="DodgerBlue"
+                                VerticalOptions="CenterAndExpand" 
+                                HorizontalOptions="CenterAndExpand" />
+                                </Grid>
+
+
+
+                                <Grid>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid Grid.Row="0" BackgroundColor="White" >
+                                        <Label Grid.Row="0" Grid.Column="0"  Text="{Binding timezone}"   FontFamily="CustomFont"   FontSize="20" FontAttributes="Bold" TextColor="DodgerBlue" />
+                                        <Label Grid.Row="1" Grid.Column="0" TextColor="DodgerBlue" FontFamily="CustomFont" Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:MMMM dd, yyyy}'}" />
+                                    </Grid>
+
+                                    <Grid Grid.Row="1" BackgroundColor="White" >
+                                        <Label Grid.Row="0" Grid.ColumnSpan="2" TextColor="DodgerBlue" FontFamily="CustomFont" Text="Today" VerticalOptions="Center" HorizontalOptions="Center" FontSize="15"/>
+                                        <Image Grid.Row="1" Grid.Column="0" Source="{Binding current.weather[0].icon_url}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                        <Label Grid.Row="1" Grid.Column="1" TextColor="DodgerBlue" Text="{Binding current.temp, StringFormat='{0:N0}°'}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="20" FontAttributes="Bold"/>
+                                        <Label Grid.Row="2" Grid.ColumnSpan="2" TextColor="DodgerBlue" FontFamily="CustomFont" Text="{Binding current.weather[0].main}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="15"/>
+                                    </Grid>
+
+                                    <Grid Grid.Row="2" BackgroundColor="White">
+                                        <Label Grid.Row="0" Grid.Column="0" TextColor="DodgerBlue" Text="{Binding current.wind_speed, StringFormat='{0:N0}km/h'}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                        <Label Grid.Row="1" Grid.Column="0" TextColor="DodgerBlue" FontFamily="CustomFont" Text="Wind" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"/>
+
+                                        <Label Grid.Row="0" Grid.Column="1" TextColor="DodgerBlue" Text="{Binding current.humidity, StringFormat='{0:N0}%'}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                        <Label Grid.Row="1" Grid.Column="1" TextColor="DodgerBlue" FontFamily="CustomFont" Text="Humidity" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"/>
+
+                                        <Label Grid.Row="0" Grid.Column="2" TextColor="DodgerBlue" Text="{Binding current.feels_like, StringFormat='{0:N0}°'}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                        <Label Grid.Row="1" Grid.Column="2" TextColor="DodgerBlue" FontFamily="CustomFont" Text="Feels Like" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                    </Grid>
+
+                                    <Grid Grid.Row="3" BackgroundColor="White">
+                                        <Label Grid.Row="0" Grid.Column="0" FontFamily="CustomFont" TextColor="DodgerBlue" Text="{Binding daily[1].date_time, StringFormat='{0:M}'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                        <Image Grid.Row="1" Grid.Column="0" Source="{Binding daily[1].weather[0].icon_url}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                        <Label Grid.Row="2" Grid.Column="0"  TextColor="DodgerBlue" Text="{Binding daily[1].temp.day, StringFormat='{0:N0}°'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="20"/>
+
+                                        <Label Grid.Row="0" Grid.Column="1" FontFamily="CustomFont" TextColor="DodgerBlue" Text="{Binding daily[2].date_time, StringFormat='{0:M}'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                        <Image Grid.Row="1" Grid.Column="1" Source="{Binding daily[2].weather[0].icon_url}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                        <Label Grid.Row="2" Grid.Column="1"  TextColor="DodgerBlue" Text="{Binding daily[2].temp.day, StringFormat='{0:N0}°'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="20"/>
+
+                                        <Label Grid.Row="0" Grid.Column="2" FontFamily="CustomFont" TextColor="DodgerBlue" Text="{Binding daily[3].date_time, StringFormat='{0:M}'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                        <Image Grid.Row="1" Grid.Column="2" Source="{Binding daily[3].weather[0].icon_url}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                        <Label Grid.Row="2" Grid.Column="2" TextColor="DodgerBlue" Text="{Binding daily[3].temp.day, StringFormat='{0:N0}°'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="20"/>
+
+                                        <Label Grid.Row="0" Grid.Column="3" FontFamily="CustomFont" TextColor="DodgerBlue" Text="{Binding daily[4].date_time, StringFormat='{0:M}'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                        <Image Grid.Row="1" Grid.Column="3" Source="{Binding daily[4].weather[0].icon_url}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                        <Label Grid.Row="2" Grid.Column="3" TextColor="DodgerBlue" Text="{Binding daily[4].temp.day, StringFormat='{0:N0}°'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="20"/>
+
+                                        <Label Grid.Row="0" Grid.Column="4" FontFamily="CustomFont"  TextColor="DodgerBlue" Text="{Binding daily[5].date_time, StringFormat='{0:M}'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                        <Image Grid.Row="1" Grid.Column="4" Source="{Binding daily[5].weather[0].icon_url}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                        <Label Grid.Row="2" Grid.Column="4" TextColor="DodgerBlue" Text="{Binding daily[5].temp.day, StringFormat='{0:N0}°'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="20"/>
+                                    </Grid>
+
+                                </Grid>
+
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+     
+    </ContentPage.Content>
+    
+</ContentPage>
